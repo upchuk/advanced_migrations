@@ -1,0 +1,5 @@
+name: Advanced migrations
+description: Advanced migrations demo module.
+
+type: module
+core: 8.x
