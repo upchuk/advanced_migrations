@@ -6,8 +6,10 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
+        "php": "^7.1",
         "drupal/core": "^8.7",
-        "php": "^7.1"
+        "drupal/migrate_plus": "^4.2",
+        "drupal/migrate_tools": "^4.1"
     },
     "require-dev": {
         "composer/installers": "~1.5",
