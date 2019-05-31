@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ro
+label: Romanian
+direction: ltr
+weight: 1
+locked: false

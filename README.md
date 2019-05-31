@@ -1,5 +1,18 @@
 # Advanced migrations
 
+This module contains some examples of more advanced migrations:
+
+* Funky process plugin to import hierarchical terms
+* Migrate tools data fetcher plugin for scanning a directory of JSON files
+* Migration templates to import entity translations
+
+Just setup the project following the steps below using Docker and you can run the migrations:
+
+```
+drush ms
+drush migrate:import --all
+```
+
 ## Development setup
 
 You can build the development site by running the following steps:

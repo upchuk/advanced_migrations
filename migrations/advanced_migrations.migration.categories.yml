@@ -1,0 +1,34 @@
+id: categories
+label: Categories
+migration_group: advanced_migrations
+source:
+  plugin: csv
+  path: 'modules/custom/advanced_migrations/data/categories.csv'
+  header_row_count: 1
+  keys:
+    - id
+  column_names:
+    0:
+      id: 'Unique Id'
+    1:
+      label_en: 'Label EN'
+    2:
+      label_ro: 'Label RO'
+destination:
+  plugin: entity:taxonomy_term
+process:
+  vid:
+    plugin: default_value
+    default_value: categories
+  name: label_en
+  parent:
+    -
+      plugin: category_parent
+      source: id
+    -
+      plugin: migration_lookup
+      migration: categories
+      no_stub: true
+  langcode:
+    plugin: default_value
+    default_value: 'en'

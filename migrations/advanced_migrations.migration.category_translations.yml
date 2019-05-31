@@ -1,0 +1,43 @@
+id: category_translations
+label: Category translations
+migration_group: advanced_migrations
+deriver: Drupal\advanced_migrations\CategoriesLanguageDeriver
+source:
+  plugin: csv
+  path: 'modules/custom/advanced_migrations/data/categories.csv'
+  header_row_count: 1
+  keys:
+    - id
+  column_names:
+    0:
+      id: 'Unique Id'
+    1:
+      label_en: 'Label EN'
+    2:
+      label_ro: 'Label RO'
+destination:
+  plugin: entity:taxonomy_term
+  translations: true
+process:
+  vid:
+    plugin: default_value
+    default_value: categories
+  parent:
+    -
+      plugin: category_parent
+      source: id
+    -
+      plugin: migration_lookup
+      migration: categories
+      no_stub: true
+  tid:
+    plugin: migration_lookup
+    source: id
+    migration: categories
+  content_translation_source:
+    plugin: default_value
+    default_value: 'en'
+
+migration_dependencies:
+  required:
+    - categories

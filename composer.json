@@ -7,9 +7,12 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.1",
+        "drupal/admin_toolbar": "^1.27",
         "drupal/core": "^8.7",
         "drupal/migrate_plus": "^4.2",
-        "drupal/migrate_tools": "^4.1"
+        "drupal/migrate_source_csv": "^2.2",
+        "drupal/migrate_tools": "^4.1",
+        "drupal/restui": "^1.17"
     },
     "require-dev": {
         "composer/installers": "~1.5",

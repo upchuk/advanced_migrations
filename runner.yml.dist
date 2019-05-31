@@ -12,7 +12,7 @@ drupal:
     password: ""
   post_install:
     # Enable the modules.
-    - "./vendor/bin/drush en advanced_migrations -y"
+    - "./vendor/bin/drush en advanced_migrations admin_toolbar -y"
   settings:
     settings:
       file_scan_ignore_directories:

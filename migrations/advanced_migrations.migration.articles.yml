@@ -1,0 +1,42 @@
+id: articles
+label: Articles
+migration_group: advanced_migrations
+source:
+  plugin: url
+  data_fetcher_plugin: json_directory
+  data_parser_plugin: json
+  urls:
+    - 'modules/custom/advanced_migrations/data/articles'
+  item_selector: articles
+  fields:
+    -
+      name: id
+      label: 'The article ID'
+      selector: id
+    -
+      name: title
+      label: 'Article title'
+      selector: title
+    -
+      name: body
+      label: 'Article body'
+      selector: body
+    -
+      name: langcode
+      label: 'Article langcode'
+      selector: langcode
+  ids:
+    id:
+      type: integer
+process:
+  type:
+    plugin: default_value
+    default_value: article
+  title: title
+  'body/value': body
+  'body/format':
+    plugin: default_value
+    default_value: basic_html
+  langcode: langcode
+destination:
+  plugin: 'entity:node'

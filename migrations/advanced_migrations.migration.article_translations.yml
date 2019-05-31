@@ -1,0 +1,53 @@
+id: article_translations
+label: Article translations
+migration_group: advanced_migrations
+deriver: Drupal\advanced_migrations\ArticleLanguageDeriver
+source:
+  plugin: url
+  data_fetcher_plugin: json_directory
+  data_parser_plugin: json
+  item_selector: articles
+  fields:
+    -
+      name: id
+      label: 'The article ID'
+      selector: id
+    -
+      name: title
+      label: 'Article title'
+      selector: title
+    -
+      name: body
+      label: 'Article body'
+      selector: body
+    -
+      name: langcode
+      label: 'Article langcode'
+      selector: langcode
+  ids:
+    id:
+      type: integer
+process:
+  type:
+    plugin: default_value
+    default_value: article
+  nid:
+    plugin: migration_lookup
+    source: id
+    migration: articles
+  title: title
+  'body/value': body
+  'body/format':
+    plugin: default_value
+    default_value: basic_html
+  langcode: langcode
+  content_translation_source:
+    plugin: default_value
+    default_value: 'en'
+destination:
+  plugin: 'entity:node'
+  translations: true
+
+migration_dependencies:
+  required:
+    - articles

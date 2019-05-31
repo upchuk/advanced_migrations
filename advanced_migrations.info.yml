@@ -3,3 +3,11 @@ description: Advanced migrations demo module.
 
 type: module
 core: 8.x
+
+dependencies:
+  - drupal:migrate
+  - drupal:content_translation
+  - migrate_tools:migrate_tools
+  - migrate_plus:migrate_plus
+  - migrate_plus:migrate_plus
+  - migrate_source_csv:migrate_source_csv
