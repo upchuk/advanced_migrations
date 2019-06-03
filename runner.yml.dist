@@ -1,15 +1,15 @@
 drupal:
   root: "build"
-  base_url: "http://web:8080/build"
+  base_url: "ttp://nginx"
   site:
     name: "Advanced migrations"
     profile: "standard"
   database:
-    host: "mysql"
+    host: "mariadb"
     port: "3306"
-    name: "advanced_migrations"
-    user: "root"
-    password: ""
+    name: "drupal"
+    user: "drupal"
+    password: "drupal"
   post_install:
     # Enable the modules.
     - "./vendor/bin/drush en advanced_migrations admin_toolbar -y"

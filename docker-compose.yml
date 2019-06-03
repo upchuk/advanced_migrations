@@ -1,25 +1,50 @@
-version: '2'
+version: "2"
+
 services:
-  web:
-    image: fpfis/httpd-php-dev:7.1
-    working_dir: /var/www/html
-    ports:
-      - 8080:8080
-    volumes:
-      - .:/var/www/html # Non Mac users.
-      # - nfsmount:/var/www/html # Mac Users with the nfsmount volume.
+
+  mariadb:
+    image: wodby/mariadb:10.1-3.3.0
+    stop_grace_period: 30s
     environment:
-      XDEBUG_CONFIG: "remote_enable=1 remote_host=10.254.254.254 remote_port=9000 idekey=PHPSTORM remote_autostart=1"
-      PHP_IDE_CONFIG: "serverName=Docker"
-      # For Xdebug setup, run this command in the terminal:
-      # For Mac users: sudo ifconfig en0 alias 10.254.254.254 255.255.255.0
-      # For Linux users: sudo ip addr add 10.254.254.254/32 dev lo label lo:1
-  mysql:
-    image: percona/percona-server:5.6
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
     ports:
       - 3306:3306
+
+  php:
+    image: wodby/drupal-php:7.1
+    environment:
+      DB_HOST: mariadb
+      DB_USER: drupal
+      DB_PASSWORD: drupal
+      DB_NAME: drupal
+      DB_DRIVER: mysql
+      PHP_XDEBUG: 1
+      PHP_XDEBUG_DEFAULT_ENABLE: 1
+      PHP_XDEBUG_REMOTE_CONNECT_BACK: 0
+      PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"
+      PHP_XDEBUG_REMOTE_AUTOSTART: 1
+      PHP_XDEBUG_IDEKEY: "PHPSTORM"
+      PHP_IDE_CONFIG: "serverName=docker"
+    volumes:
+      - ./:/var/www/html
+
+  nginx:
+    image: wodby/nginx:1.15-5.0.0
+    depends_on:
+    - php
+    environment:
+      NGINX_STATIC_OPEN_FILE_CACHE: "off"
+      NGINX_ERROR_LOG_LEVEL: debug
+      NGINX_BACKEND_HOST: php
+      NGINX_SERVER_ROOT: /var/www/html/build
+      NGINX_VHOST_PRESET: drupal8
+    volumes:
+     - ./:/var/www/html
+    ports:
+    - "8080:80"
 
 #### Mac users: uncomment the "volumes" key to enable the NFS file sharing. You can find more information about Docker for Mac here: https://github.com/openeuropa/openeuropa/blob/master/docs/starting/tooling.md#using-docker-on-macos
 
