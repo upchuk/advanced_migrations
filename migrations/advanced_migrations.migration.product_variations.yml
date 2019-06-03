@@ -1,0 +1,41 @@
+id: product_variations
+label: Product variations
+migration_group: advanced_migrations
+deriver: Drupal\advanced_migrations\ProductVariationsDeriver
+source:
+  plugin: csv
+  path: 'modules/custom/advanced_migrations/data/products.csv'
+  header_row_count: 1
+  keys:
+    - id
+  column_names:
+    0:
+      id: 'Unique ID'
+    1:
+      name: 'Product name'
+    2:
+      price_pick_up: 'Price if picked up in store'
+    3:
+      price_delivered: 'Price if delivered'
+destination:
+  plugin: entity:commerce_product_variation
+process:
+  type:
+    plugin: default_value
+    default_value: default
+  'price/currency_code':
+    plugin: default_value
+    default_value: 'USD'
+  product_id:
+    plugin: migration_lookup
+    source: id
+    migration: products
+  attribute_fulfilment_method:
+    plugin: migration_lookup
+    source: constants/fulfilment_method
+    migration: fulfilment_methods
+
+migration_dependencies:
+  required:
+    - products
+    - fulfilment_methods

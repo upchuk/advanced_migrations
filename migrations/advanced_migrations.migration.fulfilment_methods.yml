@@ -1,0 +1,22 @@
+id: fulfilment_methods
+label: Fulfilment methods
+migration_group: advanced_migrations
+source:
+  plugin: csv
+  path: 'modules/custom/advanced_migrations/data/fulfilment_methods.csv'
+  header_row_count: 1
+  keys:
+    - id
+  column_names:
+    0:
+      id: 'Unique Id'
+    1:
+      name: 'Name'
+
+destination:
+  plugin: entity:commerce_product_attribute_value
+process:
+  attribute:
+    plugin: default_value
+    default_value: 'fulfilment_method'
+  name: name

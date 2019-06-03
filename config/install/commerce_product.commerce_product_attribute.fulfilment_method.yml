@@ -1,0 +1,6 @@
+langcode: en
+status: true
+dependencies: {  }
+id: fulfilment_method
+label: 'Fulfilment method'
+elementType: select

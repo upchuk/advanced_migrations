@@ -1,0 +1,25 @@
+id: products
+label: Products
+migration_group: advanced_migrations
+source:
+  plugin: csv
+  path: 'modules/custom/advanced_migrations/data/products.csv'
+  header_row_count: 1
+  keys:
+    - id
+  column_names:
+    0:
+      id: 'Unique ID'
+    1:
+      name: 'Product name'
+    2:
+      price_pick_up: 'Price if picked up in store'
+    3:
+      price_delivered: 'Price if delivered'
+destination:
+  plugin: entity:commerce_product
+process:
+  type:
+    plugin: default_value
+    default_value: default
+  title: name
