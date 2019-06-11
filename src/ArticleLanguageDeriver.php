@@ -19,7 +19,7 @@ class ArticleLanguageDeriver extends DeriverBase implements ContainerDeriverInte
   protected $languageManager;
 
   /**
-   * ProductGroupsDeriver constructor.
+   * ArticleLanguageDeriver constructor.
    *
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    */

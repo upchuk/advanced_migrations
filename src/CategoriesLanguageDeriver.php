@@ -19,7 +19,7 @@ class CategoriesLanguageDeriver extends DeriverBase implements ContainerDeriverI
   protected $languageManager;
 
   /**
-   * ProductGroupsDeriver constructor.
+   * CategoriesLanguageDeriver constructor.
    *
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    */
