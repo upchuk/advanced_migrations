@@ -1,6 +1,6 @@
 drupal:
   root: "build"
-  base_url: "ttp://nginx"
+  base_url: "http://nginx"
   site:
     name: "Advanced migrations"
     profile: "standard"

@@ -5,7 +5,7 @@ source:
   plugin: csv
   path: 'modules/custom/advanced_migrations/data/fulfilment_methods.csv'
   header_row_count: 1
-  keys:
+  ids:
     - id
   column_names:
     0:
